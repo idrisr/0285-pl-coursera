@@ -34,11 +34,9 @@ val x = number_in_month([(1, 8, 3), (2, 8, 3), (4, 1, 9)], 8);
 (* Assume the list of months has no number repeated. Hint: Use your answer to the *)
 (* previous problem.  *)
 fun number_in_months(dates: (int*int*int) list, months: int list) =
-  if null dates 
-  then 0 
+  if null dates then 0 
   else
-    if null months 
-    then 0 
+    if null months then 0 
     else
       number_in_month (dates, hd months) + 
       number_in_months(dates, tl months)
@@ -57,8 +55,7 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
 (* fun date_to_string(date: int*int*int date) = *)
 
 fun dates_in_month(dates: (int*int*int) list, month: int) =
-  if null dates
-  then []
+  if null dates then []
   else 
     if (#2 (hd dates)) = month
     then (hd dates) :: dates_in_month(tl dates, month)
@@ -68,14 +65,8 @@ val x = dates_in_month([(1, 4, 3), (7, 2, 5)], 4)
 val y = dates_in_month([], 4)
 
 
-(* 5. Write a function dates_in_months that takes a list of dates and a list of *)
-     (* months (i.e., an int list) and returns a list holding the dates from the *)
-     (* argument list of dates that are in any of the months in the list of months. *)
-     (* Assume the list of months has no number repeated. Hint: Use your answer to *)
-     (* the previous problem and SML’s list-append operator (@). *)
 fun dates_in_months(dates: (int*int*int) list, months: int list) =
-  if null dates
-  then []
+  if null dates then []
   else 
     if null months
     then []
@@ -83,3 +74,12 @@ fun dates_in_months(dates: (int*int*int) list, months: int list) =
       dates_in_month(dates, hd months) @ dates_in_months(dates, tl months)
 
 val y = dates_in_months([(1, 4, 3), (7, 2, 5)], [5, 2])
+
+(* 6. Write a function get_nth that takes a list of strings and an int n and *)
+(* returns the nth element of the list where the head of the list is 1st. Do not *)
+(* worry about the case where the list has too few elements: your function may *)
+(* apply hd or tl to the empty list in this case, which is okay. *)
+
+fun get_nth(l: string list, n: int) =
+  if n = 1 then hd l
+  else get_nth(tl l, n-1)
