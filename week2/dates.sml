@@ -33,4 +33,15 @@ val x = number_in_month([(1, 8, 3), (2, 8, 3), (4, 1, 9)], 8);
 
 (* Assume the list of months has no number repeated. Hint: Use your answer to the *)
 (* previous problem.  *)
-fun number_in_months(dates: (int*int*int) list, month: int) =
+fun number_in_months(dates: (int*int*int) list, months: int list) =
+  if null dates 
+  then 0 
+  else
+    if null months 
+    then 0 
+    else
+      number_in_month (dates, hd months) + 
+      number_in_months(dates, tl months)
+
+
+val y = number_in_months([(1, 8, 3), (2, 9, 4)], [8, 9])
