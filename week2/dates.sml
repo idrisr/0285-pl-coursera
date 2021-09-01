@@ -56,16 +56,6 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
 
 (* fun date_to_string(date: int*int*int date) = *)
 
-fun append (xs : int list, ys : int list) = (* part of the course logo :) *)
-    if null xs
-    then ys
-    else hd(xs) :: append(tl(xs), ys)
-
-(* 4.  *)
-(* Write a function dates_in_month that takes  *)
-(* a list of dates and a month (i.e., an int) and  *)
-(* returns a list holding the dates from the argument list of dates that are in the month.  *)
-(* The returned list should contain dates in the order they were originally given. *)
 fun dates_in_month(dates: (int*int*int) list, month: int) =
   if null dates
   then []
@@ -76,3 +66,20 @@ fun dates_in_month(dates: (int*int*int) list, month: int) =
 
 val x = dates_in_month([(1, 4, 3), (7, 2, 5)], 4)
 val y = dates_in_month([], 4)
+
+
+(* 5. Write a function dates_in_months that takes a list of dates and a list of *)
+     (* months (i.e., an int list) and returns a list holding the dates from the *)
+     (* argument list of dates that are in any of the months in the list of months. *)
+     (* Assume the list of months has no number repeated. Hint: Use your answer to *)
+     (* the previous problem and SML’s list-append operator (@). *)
+fun dates_in_months(dates: (int*int*int) list, months: int list) =
+  if null dates
+  then []
+  else 
+    if null months
+    then []
+    else 
+      dates_in_month(dates, hd months) @ dates_in_months(dates, tl months)
+
+val y = dates_in_months([(1, 4, 3), (7, 2, 5)], [5, 2])
