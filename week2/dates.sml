@@ -44,4 +44,35 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
       number_in_months(dates, tl months)
 
 
-val y = number_in_months([(1, 8, 3), (2, 9, 4)], [8, 9])
+(* 7. Writea function date_to_string that takes a date and returns a string of
+        * the form  January 20, 2013 (for example).  *)
+
+(* Use the operator ^ for concatenating strings and the *)
+(* library function Int.toString for converting an int to a string. For producing *)
+(* the month part, do not use a bunch of conditionals. Instead, use a list holding *)
+(* 12 strings and your answer to the previous problem. For consistency, put a comma *)
+(* following the day and use capitalized English month names: January, February, *)
+(* March, April, May, June, July, August, September, October, November, December. *)
+
+(* fun date_to_string(date: int*int*int date) = *)
+
+fun append (xs : int list, ys : int list) = (* part of the course logo :) *)
+    if null xs
+    then ys
+    else hd(xs) :: append(tl(xs), ys)
+
+(* 4.  *)
+(* Write a function dates_in_month that takes  *)
+(* a list of dates and a month (i.e., an int) and  *)
+(* returns a list holding the dates from the argument list of dates that are in the month.  *)
+(* The returned list should contain dates in the order they were originally given. *)
+fun dates_in_month(dates: (int*int*int) list, month: int) =
+  if null dates
+  then []
+  else 
+    if (#2 (hd dates)) = month
+    then (hd dates) :: dates_in_month(tl dates, month)
+    else dates_in_month(tl dates, month)
+
+val x = dates_in_month([(1, 4, 3), (7, 2, 5)], 4)
+val y = dates_in_month([], 4)
