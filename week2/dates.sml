@@ -87,3 +87,17 @@ fun month_range(day1: int, day2: int) =
     appender(day1, day2, [])
   end
 
+fun oldest(dates: (int*int*int) list) =
+  if null dates
+  then NONE
+  else 
+    let fun helper(min: int*int*int, dates: (int*int*int) list) =
+      if null dates
+      then min
+      else
+        if is_older(min, hd dates)
+        then helper(min, tl dates)
+        else helper(hd dates, tl dates)
+    in  
+      SOME (helper(hd dates, tl dates))
+    end
