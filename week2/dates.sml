@@ -1,14 +1,14 @@
 fun is_older(x: int*int*int, y: int*int*int) = 
   (* true is x comes first *)
-  if (#1 x) = (#1 y) 
+  if #1 x = #1 y 
   then 
-    if (#2 x) = (#2 y)
+    if #2 x = #2 y
     then 
-      if (#3 x) = (#3 y)
+      if #3 x = #3 y
       then false
-      else (#3 x) < (#3 y)
-    else (#2 x) < (#2 y)
-  else (#1 x) < (#1 y)
+      else #3 x < #3 y
+    else #2 x < #2 y
+  else #1 x < #1 y
 
 
 fun number_in_month(dates: (int*int*int) list, month: int) =
@@ -36,7 +36,7 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
 fun dates_in_month(dates: (int*int*int) list, month: int) =
   if null dates then []
   else 
-    if (#2 (hd dates)) = month
+    if #2 (hd dates) = month
     then (hd dates) :: dates_in_month(tl dates, month)
     else dates_in_month(tl dates, month)
 
