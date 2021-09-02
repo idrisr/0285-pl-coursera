@@ -42,17 +42,6 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
       number_in_months(dates, tl months)
 
 
-(* 7. Writea function date_to_string that takes a date and returns a string of
-        * the form  January 20, 2013 (for example).  *)
-
-(* Use the operator ^ for concatenating strings and the *)
-(* library function Int.toString for converting an int to a string. For producing *)
-(* the month part, do not use a bunch of conditionals. Instead, use a list holding *)
-(* 12 strings and your answer to the previous problem. For consistency, put a comma *)
-(* following the day and use capitalized English month names: January, February, *)
-(* March, April, May, June, July, August, September, October, November, December. *)
-
-(* fun date_to_string(date: int*int*int date) = *)
 
 fun dates_in_month(dates: (int*int*int) list, month: int) =
   if null dates then []
@@ -61,8 +50,6 @@ fun dates_in_month(dates: (int*int*int) list, month: int) =
     then (hd dates) :: dates_in_month(tl dates, month)
     else dates_in_month(tl dates, month)
 
-val x = dates_in_month([(1, 4, 3), (7, 2, 5)], 4)
-val y = dates_in_month([], 4)
 
 
 fun dates_in_months(dates: (int*int*int) list, months: int list) =
@@ -73,13 +60,18 @@ fun dates_in_months(dates: (int*int*int) list, months: int list) =
     else 
       dates_in_month(dates, hd months) @ dates_in_months(dates, tl months)
 
-val y = dates_in_months([(1, 4, 3), (7, 2, 5)], [5, 2])
-
-(* 6. Write a function get_nth that takes a list of strings and an int n and *)
-(* returns the nth element of the list where the head of the list is 1st. Do not *)
-(* worry about the case where the list has too few elements: your function may *)
-(* apply hd or tl to the empty list in this case, which is okay. *)
 
 fun get_nth(l: string list, n: int) =
   if n = 1 then hd l
   else get_nth(tl l, n-1)
+
+
+fun date_to_string(date: int*int*int) =
+  let val months = ["January", "February", "March", "April", 
+                    "May", "June", "July", "August", 
+                    "September", "October", "November", "December"]
+  in
+    get_nth(months, #2 date) ^ " " ^ Int.toString(#1 date) ^ ", " ^ Int.toString(#3 date)
+  end
+
+val y = date_to_string((12, 6, 1976))
