@@ -90,5 +90,5 @@ val x = number_before_reaching_sum(14, [2, 2, 3, 8, 5])
 fun what_month(doy: int) =
   let val b = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   in
-    int_to_month( number_before_reaching_sum(doy, b) + 1)
+    number_before_reaching_sum(doy, b) + 1
   end
