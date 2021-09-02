@@ -71,7 +71,16 @@ fun date_to_string(date: int*int*int) =
                     "May", "June", "July", "August", 
                     "September", "October", "November", "December"]
   in
-    get_nth(months, #2 date) ^ " " ^ Int.toString(#1 date) ^ ", " ^ Int.toString(#3 date)
+    get_nth(months, #2 date) ^ " " ^ Int.toString(#3 date) ^ ", " ^ Int.toString(#1 date)
   end
 
-val y = date_to_string((12, 6, 1976))
+
+fun number_before_reaching_sum(sum: int, vals: int list) = 
+  let fun helper(count: int, total: int, sum: int, vals: int list) = 
+    if total + hd vals >= sum
+    then count
+    else helper(count+1, total + hd vals, sum, tl vals)
+  in helper(0, 0, sum, vals)
+  end
+
+val x = number_before_reaching_sum(14, [2, 2, 3, 8, 5])
