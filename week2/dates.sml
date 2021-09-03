@@ -21,8 +21,6 @@ fun number_in_month(dates: (int*int*int) list, month: int) =
       else 0 + number_in_month(tl dates, month)
     end
 
-val x = number_in_month([(1, 8, 3), (2, 8, 3), (4, 1, 9)], 8);
-
 fun number_in_months(dates: (int*int*int) list, months: int list) =
   if null dates then 0 
   else
