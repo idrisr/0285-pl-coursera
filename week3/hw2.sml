@@ -34,6 +34,9 @@ fun card_value c =
      | (_, Jack) => 10
      | (_, Num i) => i
 
+fun remove_card(cs, c, e) =
+  8
+
 fun append (xs,ys) =
     case xs of
         [] => ys
@@ -48,27 +51,16 @@ fun filter(s, xs) =
                  then filter(s, xs')
                  else x::filter(s, xs')
 
-fun is_in(s, xs) =
+fun is_in(s, xs, f) =
   case xs of
        [] => false
-     | x::xs' => same_string(s, x) orelse is_in(s, xs')
+     | x::xs' => f(s, x) orelse is_in(s, xs', f)
 
 
 fun all_except_option(s, xs) = 
-  if is_in(s, xs)
+  if is_in(s, xs, same_string)
   then SOME (filter(s, xs))
   else NONE
-
-
-fun is_sub_list(xs, ys) =
-  (* xs: sub list *)
-  (* ys: big list *)
-  case (xs, ys) of
-       (_, []) => false
-     | ([], _) => true
-     | (x::xs',_) => if is_in(x, ys)
-  then is_sub_list(xs', ys)
-  else false
 
 
 fun get_substitutions1(xs, s) =
