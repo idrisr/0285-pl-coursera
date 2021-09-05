@@ -19,6 +19,9 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
+fun same_card(c1, c2) =
+  c1=c2
+
 fun card_color c =
   case c of
        (Clubs,_) => Black
@@ -35,7 +38,9 @@ fun card_value c =
      | (_, Num i) => i
 
 fun remove_card(cs, c, e) =
-  8
+  if not(is_in(c, cs, same_card))
+  then raise e
+  else filter_first(cs, c)
 
 fun append (xs,ys) =
     case xs of
@@ -43,6 +48,12 @@ fun append (xs,ys) =
       | x::xs' => x :: append(xs',ys)
 
 (* put your solutions for problem 2 here *)
+fun filter_first(cs, c) =
+  case cs of 
+       [] => []
+     | d::cs' => if d=c
+                 then cs'
+                 else d::filter_first(cs', c)
 
 fun filter(s, xs) = 
   case xs of

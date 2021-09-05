@@ -19,13 +19,6 @@ the held-cards are the same color, in which case the score is the preliminary
 score divided by 2 (and rounded down as usual with integer division; use ML’s
 div operator).
 
-(a) Write a function card_color, which takes a card and returns its color
-(spades and clubs are black, diamonds and hearts are red). Note: One
-case-expression is enough.  
-
-(b) Write a function card_value, which takes a card and returns its value
-(numbered cards have their number as the value, aces are 11, everything else is
-10). Note: One case-expression is enough.
 
 (c) Write a function remove_card, which takes a list of cards cs, a card c, and
 an exception e. It returns a list that has all the elements of cs except c. If c
