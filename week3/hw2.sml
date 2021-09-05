@@ -58,6 +58,18 @@ fun sum_cards cs =
     aux(cs, 0)
   end
 
+fun score(cs, goal) =
+  let val total = sum_cards cs
+    val prelim = if total > goal
+                 then 3 * (total-goal)
+                 else goal-total
+  in
+    if all_same_color(cs)
+    then prelim div 2
+    else prelim
+  end
+
+
 (* put your solutions for problem 2 here *)
 fun filter_first(cs, c) =
   case cs of
