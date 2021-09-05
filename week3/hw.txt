@@ -20,16 +20,6 @@ score divided by 2 (and rounded down as usual with integer division; use ML’s
 div operator).
 
 
-(c) Write a function remove_card, which takes a list of cards cs, a card c, and
-an exception e. It returns a list that has all the elements of cs except c. If c
-is in the list more than once, remove only the first one. If c is not in the
-list, raise the exception e. You can compare cards with =.
-
-(d) Write a function all_same_color, which takes a list of cards and returns
-true if all the cards in the list are the same color. Hint: An elegant solution
-is very similar to one of the functions using nested pattern-matching in the
-lectures.
-
 (e) Write a function sum_cards, which takes a list of cards and returns the sum
 of their values. Use a locally defined helper function that is tail recursive.
 (Take “calls use a constant amount of stack space” as a requirement for this

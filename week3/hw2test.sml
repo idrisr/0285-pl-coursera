@@ -35,7 +35,8 @@ IllegalMove) = [(Hearts, Ace)]
 
 val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)]
 
-(* val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4 *)
+val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4
+val test91 = sum_cards [(Clubs, Ace),(Clubs, Num 2)] = 13
 
 (* val test10 = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4 *)
 

@@ -49,6 +49,15 @@ fun card_value c =
      | (_, Jack) => 10
      | (_, Num i) => i
 
+fun sum_cards cs =
+  let fun aux(cs, acc) =
+  case cs of
+       [] => acc
+     | c::cs' => aux(cs', acc+card_value c)
+  in
+    aux(cs, 0)
+  end
+
 (* put your solutions for problem 2 here *)
 fun filter_first(cs, c) =
   case cs of
