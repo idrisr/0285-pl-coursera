@@ -19,8 +19,10 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
-fun same_card(c1, c2) =
-  c1=c2
+fun is_in(s, xs, f) =
+  case xs of
+       [] => false
+     | x::xs' => f(s, x) orelse is_in(s, xs', f)
 
 fun card_color c =
   case c of
@@ -28,6 +30,16 @@ fun card_color c =
      | (Spades,_) => Black
      | (Hearts,_) => Red
      | (Diamonds,_) => Red
+
+fun all_same_color cs =
+  case cs of
+       [] => true
+     | x::[] => true
+     | head::(neck::rest) => card_color(head) = card_color(neck) andalso all_same_color(neck::rest)
+
+fun same_card(c1, c2) =
+  c1=c2
+
     
 fun card_value c =
   case c of
@@ -36,6 +48,14 @@ fun card_value c =
      | (_, Queen) => 10
      | (_, Jack) => 10
      | (_, Num i) => i
+
+(* put your solutions for problem 2 here *)
+fun filter_first(cs, c) =
+  case cs of
+       [] => []
+     | d::cs' => if d=c
+                 then cs'
+                 else d::filter_first(cs', c)
 
 fun remove_card(cs, c, e) =
   if not(is_in(c, cs, same_card))
@@ -47,13 +67,6 @@ fun append (xs,ys) =
         [] => ys
       | x::xs' => x :: append(xs',ys)
 
-(* put your solutions for problem 2 here *)
-fun filter_first(cs, c) =
-  case cs of 
-       [] => []
-     | d::cs' => if d=c
-                 then cs'
-                 else d::filter_first(cs', c)
 
 fun filter(s, xs) = 
   case xs of
@@ -62,10 +75,6 @@ fun filter(s, xs) =
                  then filter(s, xs')
                  else x::filter(s, xs')
 
-fun is_in(s, xs, f) =
-  case xs of
-       [] => false
-     | x::xs' => f(s, x) orelse is_in(s, xs', f)
 
 
 fun all_except_option(s, xs) = 

@@ -33,7 +33,7 @@ val test7 = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 val test71 = remove_card ([(Clubs, Ace), (Hearts, Ace)], (Clubs, Ace),
 IllegalMove) = [(Hearts, Ace)]
 
-(* val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)] = true *)
+val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)]
 
 (* val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4 *)
 
