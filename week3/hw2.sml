@@ -67,7 +67,20 @@ fun get_substitutions2(xs, s) =
        [] => acc
      | x::xs' => case all_except_option(s, x) of
                       NONE   => aux(acc,  xs')
-                    | SOME x => aux(x@acc,xs')
+                    | SOME x => aux(acc@x,xs')
   in
     aux([], xs)
+  end
+
+fun similar_names(xs, name: {first:string,middle:string,last:string}) =
+  let 
+    val {first=x,middle=y,last=z} = name
+    fun make_name(x) = {first=x, middle=y, last=z}
+    val ys = get_substitutions2(xs, x) 
+    fun map (xs,f) =
+          case xs of
+              [] => []
+            | x::xs' => f(x) :: map(xs',f)
+  in
+    name::map(ys, make_name)
   end
