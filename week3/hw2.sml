@@ -19,4 +19,44 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
+
+fun append (xs,ys) =
+    case xs of
+        [] => ys
+      | x::xs' => x :: append(xs',ys)
+
 (* put your solutions for problem 2 here *)
+
+fun filter(s, xs) = 
+  case xs of
+       [] => []
+     | x::xs' => if same_string(x, s)
+                 then filter(s, xs')
+                 else x::filter(s, xs')
+
+fun is_in(s, xs) =
+  case xs of
+       [] => false
+     | x::xs' => same_string(s, x) orelse is_in(s, xs')
+
+fun all_except_option(s, xs) = 
+  if is_in(s, xs)
+  then SOME (filter(s, xs))
+  else NONE
+
+fun is_sub_list(xs, ys) =
+  (* xs: sub list *)
+  (* ys: big list *)
+  case (xs, ys) of
+       (_, []) => false
+     | ([], _) => true
+     | (x::xs',_) => if is_in(x, ys)
+  then is_sub_list(xs', ys)
+  else false
+
+fun get_substitutions1(xs, s) =
+  case xs of 
+       [] => []
+     | x::xs' => case all_except_option(s, x) of
+                      NONE => get_substitutions1(xs', s)
+                    | SOME x => x@get_substitutions1(xs', s)

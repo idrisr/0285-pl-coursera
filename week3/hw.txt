@@ -25,12 +25,22 @@ identical to the argument list except the string is not in it. You may assume
 the string is in the list at most once. Use same_string, provided to you, to
 compare strings. Sample solution is around 8 lines.  
 
-(b) Write a function get_substitutions1, which takes a string list list (a list
-of list of strings, the substitutions) and a string s and returns a string list.
+(b) Write a function get_substitutions1, which takes a 
+
+string list list (a list of list of strings, the substitutions) 
+and a string s and 
+returns a string list.
+
 The result has all the strings that are in some list in substitutions that also
 has s, but s itself should not be in the result.  Example:
-get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
-"Fred") (* answer: ["Fredrick","Freddie","F"] *) Assume each list in
+
+get_substitutions1(
+[["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+"Fred"
+) 
+(* answer: ["Fredrick","Freddie","F"] *)
+
+Assume each list in
 substitutions has no repeats. The result will have repeats if s and another
 string are both in more than one list in substitutions. Example:
 get_substitutions1([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jeff","Jeffrey"]],
