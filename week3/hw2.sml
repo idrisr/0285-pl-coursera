@@ -58,5 +58,16 @@ fun get_substitutions1(xs, s) =
   case xs of 
        [] => []
      | x::xs' => case all_except_option(s, x) of
-                      NONE => get_substitutions1(xs', s)
+                      NONE   => get_substitutions1(xs', s)
                     | SOME x => x@get_substitutions1(xs', s)
+
+fun get_substitutions2(xs, s) =
+  let fun aux(acc, xs) =
+  case xs of 
+       [] => acc
+     | x::xs' => case all_except_option(s, x) of
+                      NONE   => aux(acc,  xs')
+                    | SOME x => aux(x@acc,xs')
+  in
+    aux([], xs)
+  end
