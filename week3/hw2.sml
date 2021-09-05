@@ -19,6 +19,13 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
+fun card_color c =
+  case c of
+       (Clubs,_) => Black
+     | (Spades,_) => Black
+     | (Hearts,_) => Red
+     | (Diamonds,_) => Red
+    
 
 fun append (xs,ys) =
     case xs of
@@ -39,10 +46,12 @@ fun is_in(s, xs) =
        [] => false
      | x::xs' => same_string(s, x) orelse is_in(s, xs')
 
+
 fun all_except_option(s, xs) = 
   if is_in(s, xs)
   then SOME (filter(s, xs))
   else NONE
+
 
 fun is_sub_list(xs, ys) =
   (* xs: sub list *)
@@ -54,12 +63,14 @@ fun is_sub_list(xs, ys) =
   then is_sub_list(xs', ys)
   else false
 
+
 fun get_substitutions1(xs, s) =
   case xs of 
        [] => []
      | x::xs' => case all_except_option(s, x) of
                       NONE   => get_substitutions1(xs', s)
                     | SOME x => x@get_substitutions1(xs', s)
+
 
 fun get_substitutions2(xs, s) =
   let fun aux(acc, xs) =
@@ -71,6 +82,7 @@ fun get_substitutions2(xs, s) =
   in
     aux([], xs)
   end
+
 
 fun similar_names(xs, name: {first:string,middle:string,last:string}) =
   let 
@@ -84,3 +96,4 @@ fun similar_names(xs, name: {first:string,middle:string,last:string}) =
   in
     name::map(ys, make_name)
   end
+
