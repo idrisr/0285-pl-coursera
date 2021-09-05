@@ -26,6 +26,13 @@ fun card_color c =
      | (Hearts,_) => Red
      | (Diamonds,_) => Red
     
+fun card_value c =
+  case c of
+       (_, Ace) => 11
+     | (_, King) => 10
+     | (_, Queen) => 10
+     | (_, Jack) => 10
+     | (_, Num i) => i
 
 fun append (xs,ys) =
     case xs of
@@ -96,4 +103,3 @@ fun similar_names(xs, name: {first:string,middle:string,last:string}) =
   in
     name::map(ys, make_name)
   end
-
