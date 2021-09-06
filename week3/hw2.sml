@@ -19,6 +19,8 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
+
+
 fun is_in(s, xs, f) =
   case xs of
        [] => false
@@ -135,4 +137,27 @@ fun similar_names(xs, name: {first:string,middle:string,last:string}) =
             | x::xs' => f(x) :: map(xs',f)
   in
     name::map(ys, make_name)
+  end
+
+fun officiate(cs, ms, goal) = 
+  let 
+    fun turn (cs, ms, hs) = 
+      (* no more moves game over *)
+      case (cs, ms, hs) of
+           (_, [], _) => score(hs, goal)
+
+           (* no more cards *)
+         | ([], m::ms', _) => 
+             (case m of 
+                   Discard c => turn(cs, ms, remove_card(hs, c, IllegalMove))
+                 | Draw => score(hs, goal))
+           (* more cards *)
+         | (c::cs', m::ms', _) => 
+             (case m of 
+                   Discard c => turn(cs, ms', remove_card(hs, c, IllegalMove))
+                 | Draw => if score(c::hs, goal) > goal
+                            then score(c::hs, goal)
+                            else turn(cs', ms', c::hs))
+  in
+    turn(cs, ms, [])
   end
