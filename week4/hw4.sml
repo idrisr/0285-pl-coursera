@@ -41,13 +41,9 @@ fun only_capitals xs =
   List.filter first xs end
 
 fun longest_string xs f = 
-  case xs of 
-    [] => ""
-  | x::xs' => List.foldl(fn (a,b) => if f(a, b)
-                                     then a
-                                     else b) "" xs
+  List.foldl(fn (a,b) => if f(a, b) then a else b) "" xs 
 
-fun longest_string1 xs f = 
+fun longest_string1 xs = 
   longest_string xs (fn (a,b) => String.size(a) > String.size(b))
 
 fun longest_string2 xs = 
