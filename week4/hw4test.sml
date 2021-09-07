@@ -8,7 +8,8 @@ val test1_1 = only_capitals ["a","B","C"] = ["B","C"]
 val test2 = longest_string1 ["A","bc","C"] = "bc"
 val test2_1 = longest_string1 ["Aa","bc","C"] = "Aa"
 
-(* val test3 = longest_string2 ["A","bc","C"] = "bc" *)
+val test3 = longest_string2 ["A","bc","C"] = "bc"
+val test3_1 = longest_string2 ["Aa","bc","C"] = "bc"
 (* val test4a = longest_string3 ["A","bc","C"] = "bc" *)
 (* val test4b = longest_string4 ["A","B","C"] = "C" *)
 (* val test5 = longest_capitalized ["A","bc","C"] = "A" *)
