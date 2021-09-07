@@ -39,3 +39,10 @@ datatype typ = Anything
 fun only_capitals xs =
   let val first = Char.isUpper o (fn x=>String.sub(x, 0)) in
   List.filter first xs end
+
+fun longest_string1 xs = 
+  case xs of 
+    [] => ""
+  | x::xs' => List.foldl(fn (a,b) => if String.size(a) > String.size(b)
+                                     then a
+                                     else b) "" xs
