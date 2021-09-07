@@ -37,4 +37,5 @@ datatype typ = Anything
 (**** you can put all your code here ****)
 
 fun only_capitals xs =
-  List.filter(fn x => (Char.isUpper o String.sub) (x, 0), xs)
+  let val first = Char.isUpper o (fn x=>String.sub(x, 0)) in
+  List.filter first xs end
