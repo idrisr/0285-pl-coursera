@@ -58,3 +58,11 @@ val longest_string3 = fn xs => longest_string_helper (fn (a,b) => a >  b) xs
 val longest_string4 = fn xs => longest_string_helper (fn (a,b) => a >= b) xs
 val longest_capitalized = fn xs => (longest_string1 o only_capitals) xs
 val rev_string = fn x => (String.implode o List.rev o String.explode) x
+
+fun first_answer f xs =
+  case (List.find (fn x=> 
+    case f(x) of
+      SOME x => true
+    | NONE => false) xs)
+    of SOME x => x
+    | NONE => raise NoAnswer
