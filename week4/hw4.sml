@@ -54,6 +54,10 @@ fun longest_string_helper f xs =
                          then a 
                          else b) "" xs 
 
-(* val longest_string3 = fn xs => longest_string_helper (fn (a,b) => a >  b) xs *)
 val longest_string3 = fn xs => longest_string_helper (fn (a,b) => a >  b) xs
 val longest_string4 = fn xs => longest_string_helper (fn (a,b) => a >= b) xs
+
+val longest_capitalized = fn xs => (longest_string1 o only_capitals) xs
+
+
+
