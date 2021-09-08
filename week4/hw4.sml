@@ -60,9 +60,22 @@ val longest_capitalized = fn xs => (longest_string1 o only_capitals) xs
 val rev_string = fn x => (String.implode o List.rev o String.explode) x
 
 fun first_answer f xs =
-  case (List.find (fn x=> 
+  case (List.find(fn x=>
     case f(x) of
       SOME x => true
     | NONE => false) xs)
     of SOME x => x
     | NONE => raise NoAnswer
+
+
+fun all_answers f xs = 
+  let fun aux (xs, acc) =
+  case (acc, xs) of
+    (NONE, _) => NONE
+  | (SOME acc,[])=> SOME acc
+  | (SOME acc, x::xs') => (case x of
+                      SOME x => aux(xs', SOME (acc@x))
+                    | NONE => NONE)
+  in
+    aux((List.map f xs), (SOME []))
+  end
