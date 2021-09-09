@@ -6,6 +6,9 @@ pattern-matching.)
 A function g has been provided to you.  
 
 g (unit->int) -> (string->int) -> pattern -> int
+
+
+
 (a) 
 Use g to define a
 function 

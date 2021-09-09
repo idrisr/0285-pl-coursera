@@ -26,8 +26,7 @@ fun g f1 f2 p =
     end
 
 (**** you can put all your code here ****)
-fun count_wildcards x =
-  g (fn _ => 1) (fn _ => 0) Wildcard
+val count_wildcards = fn p => g (fn _ => 1) (fn _ => 0) p
 
 (**** for the challenge problem only ****)
 datatype typ = Anything
@@ -42,7 +41,7 @@ fun only_capitals xs =
   List.filter first xs end
 
 fun longest_string f xs = 
-  List.foldl(fn (a,b) => if f(a, b) then a else b) "" xs 
+  List.foldl(fn (a,b) => if f(a, b) then a else b) "" xs
 
 fun longest_string1 xs = 
   longest_string (fn (a,b) => String.size(a) >  String.size(b)) xs
