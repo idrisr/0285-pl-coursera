@@ -71,11 +71,9 @@ fun first_answer f xs =
 fun all_answers f xs = 
   let fun aux (xs, acc) =
   case (acc, xs) of
-    (NONE, _) => NONE
-  | (SOME acc,[])=> SOME acc
-  | (SOME acc, x::xs') => (case x of
-                      SOME x => aux(xs', SOME (acc@x))
-                    | NONE => NONE)
+    (SOME acc,[])             => SOME acc
+  | (SOME acc, (SOME x)::xs') => aux(xs', SOME(acc@x))
+  | (_, (NONE)::xs')          => NONE
   in
     aux((List.map f xs), (SOME []))
   end
