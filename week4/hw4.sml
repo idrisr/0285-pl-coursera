@@ -2,6 +2,11 @@
 
 exception NoAnswer
 
+datatype valu = Const of int
+	      | Unit
+	      | Tuple of valu list
+	      | Constructor of string * valu
+
 datatype pattern = Wildcard
 		 | Variable of string
 		 | UnitP
@@ -9,14 +14,8 @@ datatype pattern = Wildcard
 		 | TupleP of pattern list
 		 | ConstructorP of string * pattern
 
-datatype valu = Const of int
-	      | Unit
-	      | Tuple of valu list
-	      | Constructor of string * valu
-
 fun g f1 f2 p =
-    let 
-	val r = g f1 f2 
+    let val r = g f1 f2 
     in
 	case p of
 	    Wildcard          => f1 ()
@@ -26,15 +25,17 @@ fun g f1 f2 p =
 	  | _                 => 0
     end
 
-(**** for the challenge problem only ****)
+(**** you can put all your code here ****)
+fun count_wildcards x =
+  g (fn _ => 1) (fn _ => 0) Wildcard
 
+(**** for the challenge problem only ****)
 datatype typ = Anything
 	     | UnitT
 	     | IntT
 	     | TupleT of typ list
 	     | Datatype of string
 
-(**** you can put all your code here ****)
 
 fun only_capitals xs =
   let val first = Char.isUpper o (fn x=>String.sub(x, 0)) in
