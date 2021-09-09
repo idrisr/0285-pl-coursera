@@ -9,13 +9,13 @@ val test9a01 = count_wildcards (Variable "str") = 0
 val test9a02 = count_wildcards (TupleP [Wildcard, ConstP 12, Wildcard]) = 2
 val test9a03 = count_wildcards (ConstructorP("pattern", (TupleP [Wildcard, ConstP 12, Wildcard]))) = 2
 
-(* val test9b = count_wild_and_variable_lengths (Variable("a")) = 1 *)
-(* val test9b01 = count_wild_and_variable_lengths Wildcard = 1 *)
-(* val test9b02 = count_wild_and_variable_lengths (TupleP [Wildcard, ConstP 12, Wildcard]) = 2 *)
-(* val test9b03 = count_wild_and_variable_lengths (TupleP [Wildcard, Variable "str", Wildcard]) = 5 *)
-(* val test9b04 = count_wild_and_variable_lengths (TupleP [Wildcard, Variable "str", Wildcard, Variable "str2"]) = 9 *)
-(* val test9b05 = count_wild_and_variable_lengths (ConstructorP("pattern", (TupleP [Wildcard, ConstP 12, Wildcard]))) = 2 *)
-(* val test9b06 = count_wild_and_variable_lengths (ConstructorP("pattern", (TupleP [Wildcard, Variable "str", Wildcard]))) = 5 *)
+val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
+val test9b01 = count_wild_and_variable_lengths Wildcard = 1
+val test9b02 = count_wild_and_variable_lengths (TupleP [Wildcard, ConstP 12, Wildcard]) = 2
+val test9b03 = count_wild_and_variable_lengths (TupleP [Wildcard, Variable "str", Wildcard]) = 5
+val test9b04 = count_wild_and_variable_lengths (TupleP [Wildcard, Variable "str", Wildcard, Variable "str2"]) = 9
+val test9b05 = count_wild_and_variable_lengths (ConstructorP("pattern", (TupleP [Wildcard, ConstP 12, Wildcard]))) = 2
+val test9b06 = count_wild_and_variable_lengths (ConstructorP("pattern", (TupleP [Wildcard, Variable "str", Wildcard]))) = 5
 
 (* val test9c = count_some_var ("x", Variable("x")) = 1 *)
 (* val test9c01 = count_some_var ("x", (TupleP [Wildcard, ConstP 12, Wildcard])) = 0 *)
