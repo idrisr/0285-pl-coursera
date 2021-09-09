@@ -25,10 +25,27 @@ fun g f1 f2 p =
 	  | _                 => 0
     end
 
+
 (**** you can put all your code here ****)
 val count_wildcards = fn p => g (fn _ => 1) (fn _ => 0) p
 val count_wild_and_variable_lengths = fn p => g (fn _ => 1) String.size p
-val count_some_var = fn (s, p) => g (fn _ => 0) (fn x => if x=s then 1 else 0) p
+val count_some_var=fn(s, p) => g (fn _ =>0) (fn x => if x=s then 1 else 0) p
+
+
+fun check_pat p =
+  let fun h p =
+    case p of
+      Variable x        => [x]
+    | TupleP ps         => List.foldl (fn (p,i) => (h p) @ i) [] ps
+    | ConstructorP(_,p) => h p
+    | _                 => []
+  fun unique xs =
+    case xs of
+      [] => true
+    | x::xs' => not(List.exists (fn y=>y=x) xs') andalso unique xs'
+  in
+    unique(h p)
+  end
 
 
 (**** for the challenge problem only ****)
