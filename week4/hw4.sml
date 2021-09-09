@@ -31,6 +31,29 @@ val count_wildcards = fn p => g (fn _ => 1) (fn _ => 0) p
 val count_wild_and_variable_lengths = fn p => g (fn _ => 1) String.size p
 val count_some_var=fn(s, p) => g (fn _ =>0) (fn x => if x=s then 1 else 0) p
 
+fun all_answers f xs  = 
+  let fun aux (xs, acc) =
+  case (acc, xs) of
+    (SOME acc,[])             => SOME acc
+  | (SOME acc, (SOME x)::xs') => aux(xs', SOME(acc@x))
+  | (_, (NONE)::xs')          => NONE
+  in
+    aux((List.map f xs), (SOME []))
+  end
+
+fun match(v, p) = 
+  case (v, p) of
+    (_, Wildcard) => SOME []
+  | (_, Variable s) => SOME [(s, v)]
+  | (Unit, UnitP) => SOME []
+  | (Const s, ConstP t) => if s=t then SOME [] else NONE
+  | (Tuple vs, TupleP ps) => if length(ps)=length(vs)
+                             then all_answers match (ListPair.zip(vs, ps))
+                             else NONE
+  | (Constructor(s2, v), ConstructorP(s1, p)) => if s1=s2
+                                                 then match(v, p)
+                                                 else NONE
+  | (_, _) => NONE
 
 fun check_pat p =
   let fun h p =
@@ -88,12 +111,3 @@ fun first_answer f xs =
     | NONE => raise NoAnswer
 
 
-fun all_answers f xs = 
-  let fun aux (xs, acc) =
-  case (acc, xs) of
-    (SOME acc,[])             => SOME acc
-  | (SOME acc, (SOME x)::xs') => aux(xs', SOME(acc@x))
-  | (_, (NONE)::xs')          => NONE
-  in
-    aux((List.map f xs), (SOME []))
-  end
