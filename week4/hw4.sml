@@ -28,7 +28,7 @@ fun g f1 f2 p =
 (**** you can put all your code here ****)
 val count_wildcards = fn p => g (fn _ => 1) (fn _ => 0) p
 val count_wild_and_variable_lengths = fn p => g (fn _ => 1) String.size p
-val count_some_var = fn (s, p) => g (fn _ => 1) (fn x => x) p
+val count_some_var = fn (s, p) => g (fn _ => 0) (fn x => if x=s then 1 else 0) p
 
 
 (**** for the challenge problem only ****)
