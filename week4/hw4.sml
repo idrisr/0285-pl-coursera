@@ -111,16 +111,16 @@ fun first_answer f xs =
     of SOME x => x
     | NONE => raise NoAnswer
 
-fun yo p v = 
-  case p of 
-    (Variable s)=>  [(s, v)]
-  | _=> []
 
 fun first_match v ps = 
-  let val x = first_answer (fn p=>match(v, p)) ps
+  let
+    val x = first_answer (fn p=>match(v, p)) ps
+    fun yo p v =
+      case p of
+        (Variable s)=>  [(s, v)]
+      | _=> []
   in 
     SOME (yo x v)
   end
     handle NoAnswer => NONE
 
-  
