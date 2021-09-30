@@ -14,7 +14,6 @@ datatype pattern = Wildcard
 		 | TupleP of pattern list
 		 | ConstructorP of string * pattern
 
-
 fun g f1 f2 p =
     let val r = g f1 f2 
     in
@@ -111,16 +110,16 @@ fun first_answer f xs =
     of SOME x => x
     | NONE => raise NoAnswer
 
-
 fun first_match v ps = 
   let
-    val x = first_answer (fn p=>match(v, p)) ps
+    val p = first_answer (fn p=>match(v, p)) ps
     fun yo p v =
       case p of
         (Variable s)=>  [(s, v)]
+      | TupleP ps => yo (first_answer (fn p=>match(v, p)) ps) v
+      (* | ConstP s => [("s", v)] *)
       | _=> []
   in 
-    SOME (yo x v)
+    SOME (yo p v)
   end
     handle NoAnswer => NONE
-

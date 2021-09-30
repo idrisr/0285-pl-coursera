@@ -1,3 +1,19 @@
+What is a value?
+    an expression that has no more computation to do
+
+What is an expression?
+    sequence of tokens that can be type checked and evaluated, resulting in a
+    value that depends on the state of the dynamic environment
+
+What is a pattern?
+    a method for testing whether a value matches a type shape, which can then
+    produce bindings
+
+What is an binding?
+     combination of an expression along with a variable name it is "bound" to. 
+     the expression part of a binding is type checked to assure the type is
+     compatible with the types as defined in the current static environment
+
 Given valu v and pattern p, 
 either p matches v or not. 
 
@@ -25,3 +41,6 @@ matches or SOME lst where lst is the list of bindings for the first pattern in
 the list that matches. Use first_answer and a handle-expression. 
 
 Hints: Sample solution is 3 lines.
+
+
+what does pattern matching really mean?
